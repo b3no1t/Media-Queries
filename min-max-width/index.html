@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+ <html lang="fr">
+ <head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Comparaison min-width vs max-width</title>
+   <style>
+     /* ========================================
+        APPROCHE 1 : DESKTOP-FIRST (max-width)
+        ======================================== */
+     
+     .titre-desktop-first {
+       /* Styles pour GRANDS écrans par défaut */
+       font-size: 32px;             /* Grande taille pour desktop */
+       color: #2c3e50;            /* Bleu foncé */
+       text-align: left;            /* Aligné à gauche */
+       padding: 30px;               /* Grand espacement */
+       background: #ecf0f1;       /* Fond gris clair */
+     }
+     
+     /* On ADAPTE ensuite pour les petits écrans */
+
+     /* ========================================
+        APPROCHE 2 : MOBILE-FIRST (min-width)
+        ======================================== */
+     
+     .titre-mobile-first {
+       /* Styles pour PETITS écrans par défaut */
+       font-size: 20px;           /* Petite taille pour mobile */
+       color: white;              /* Texte blanc */
+       text-align: center;        /* Centré sur mobile */
+       padding: 15px;             /* Petit espacement */
+       background: #e74c3c;       /* Fond rouge */
+     }
+     
+     /* On AMÉLIORE ensuite pour les grands écrans */
+
+     
+     /* Styles pour la démonstration */
+     .container {
+       max-width: 1200px;
+       margin: 40px auto;
+       padding: 20px;
+     }
+     
+     .explication {
+       background: #fffacd;
+       padding: 15px;
+       border-left: 4px solid #f39c12;
+       margin: 20px 0;
+     }
+   </style>
+ </head>
+ <body>
+   <div class="container">
+     <div class="explication">
+       <strong>Instructions :</strong> Réduisez et agrandissez la fenêtre de votre navigateur. 
+       Observez comment les deux titres se comportent différemment selon l'approche utilisée.
+     </div>
+     
+     <h1 class="titre-desktop-first">
+       Approche Desktop-First (max-width)
+     </h1>
+     
+     <h1 class="titre-mobile-first">
+       Approche Mobile-First (min-width)
+     </h1>
+     
+     <div class="explication">
+       <strong>Résultat identique, approche différente :</strong><br>
+       • Desktop-First part de grand et réduit<br>
+       • Mobile-First part de petit et agrandit<br>
+       • Les deux arrivent au même résultat visuel
+     </div>
+   </div>
+ </body>
+ </html>
