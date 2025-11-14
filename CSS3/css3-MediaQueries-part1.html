@@ -1,0 +1,568 @@
+<!DOCTYPE html><html><head>
+      <title>CSS2 Media Queries : les fondations</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.25/dist/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Rubik';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWbBXyIfDnIV7nEt3KSJbVDV49rz8sDE0Uw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWbBXyIfDnIV7nEt3KSJbVDV49rz8tdE0Uw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWbBXyIfDnIV7nEt3KSJbVDV49rz8tvE0Uw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWbBXyIfDnIV7nEt3KSJbVDV49rz8uDFEUw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWbBXyIfDnIV7nEt3KSJbVDV49rz8u6FEUw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWbBXyIfDnIV7nEt3KSJbVDV49rz8vdFEUw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWbBXyIfDnIV7nEt3KSJbVDV49rz8v0FEUw.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-WYi1UA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-B4i1UA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-NYi1UA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-2Y-1UA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-4I-1UA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-h4-1UA.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/rubik/v31/iJWZBXyIfDnIV5PNhY1KTN7Z-Yh-ro-1UA.ttf) format('truetype');
+}
+.markdown-preview.markdown-preview {
+  font-family: 'rubik', sans-serif;
+}
+body {
+  background-color: #f9f9f9;
+}
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="guide-complet-des-media-queries-css3">Guide complet des Media Queries CSS3 </h1>
+<blockquote>
+<p>Avant d'entamer l'apprentissage des media queries, il est essentiel de maîtriser le vocabulaire technique qui constituera la base de votre compréhension. Chaque terme présenté ici sera utilisé tout au long de ce guide et représente un concept fondamental du responsive design.</p>
+</blockquote>
+<h2 id="termes-fondamentaux">Termes fondamentaux </h2>
+<p><strong>Media Query</strong> : Une instruction CSS qui permet d'appliquer des règles de style conditionnelles en fonction des caractéristiques de l'appareil de l'utilisateur. Le terme "query" signifie "requête" ou "interrogation" - on interroge donc le navigateur sur les caractéristiques de l'écran avant d'appliquer des styles spécifiques. <em>C'est comme adapter les meubles selon la taille de la pièce<br>
+Vous réorganisez tout votre salon différemment selon que vous êtes dans un studio ou une grande maison.</em></p>
+<p><strong>Responsive Design</strong> : Approche de conception web qui vise à créer des interfaces s'adaptant automatiquement et intelligemment à tous les types d'écrans et d'appareils, du smartphone à l'écran de bureau en passant par les tablettes. Le terme "responsive" signifie littéralement "qui répond" - le design répond aux caractéristiques de l'appareil utilisé.</p>
+<p><strong>Breakpoint</strong> : Point de rupture défini en pixels où le design change de mise en page. C'est le seuil à partir duquel une media query s'active ou se désactive. Par exemple, un breakpoint à 600px signifie que le comportement du site changera à cette largeur d'écran précise.</p>
+<p><strong>Viewport</strong> : Zone d'affichage visible de la page web dans la fenêtre du navigateur. C'est littéralement ce que l'utilisateur peut voir sans faire défiler la page. Sur mobile, le viewport correspond à la taille de l'écran du téléphone. Sur desktop, il correspond à la taille de la fenêtre du navigateur.</p>
+<p><strong>Mobile-First</strong> : Méthodologie de développement qui consiste à concevoir et coder d'abord pour les appareils mobiles (petits écrans), puis à enrichir progressivement l'expérience pour les écrans plus grands. Cette approche part du principe que le mobile représente désormais la majorité du trafic web.</p>
+<p><strong>Pixel (px)</strong> : Unité de mesure fondamentale en CSS représentant un point d'affichage à l'écran. Un écran de 1920px de large contient 1920 points horizontalement. C'est l'unité la plus utilisée pour définir les breakpoints car elle offre un contrôle précis.</p>
+<h2 id="termes-css-spécifiques">Termes CSS spécifiques </h2>
+<p><strong>max-width</strong> : Propriété de condition signifiant "largeur maximale". Dans une media query, max-width: 600px cible tous les écrans dont la largeur est inférieure ou égale à 600 pixels. C'est l'outil principal de l'approche desktop-first.</p>
+<p><strong>min-width</strong> : Propriété de condition signifiant "largeur minimale". Dans une media query, min-width: 600px cible tous les écrans dont la largeur est supérieure ou égale à 600 pixels. C'est l'outil principal de l'approche mobile-first.</p>
+<p><strong>Cascade CSS</strong> : Principe fondamental du CSS selon lequel, lorsque plusieurs règles s'appliquent au même élément, c'est la dernière règle définie qui prend le dessus.<br>
+<em>Ce principe est crucial pour comprendre l'ordre des media queries</em>.</p>
+<p><strong>Block vs Inline</strong> : Deux types d'affichage fondamentaux en HTML. Un élément "block" (comme <code>&lt;div&gt;</code>) occupe toute la largeur disponible et force un retour à la ligne. Un élément "inline" (comme <code>&lt;span&gt;</code>) ne prend que la place nécessaire et reste sur la même ligne.</p>
+<h3 id="termes-darchitecture">Termes d'architecture </h3>
+<p><strong>Layout</strong> : Organisation spatiale et structurelle des éléments sur une page web. Le layout définit comment les blocs de contenu sont positionnés les uns par rapport aux autres. En responsive design, le layout change selon la taille d'écran.</p>
+<p><strong>Flexbox</strong> : Système de mise en page CSS moderne permettant d'organiser des éléments de manière flexible et adaptative. Le terme vient de "flexible box" (boîte flexible). C'est l'outil idéal pour créer des mises en page qui s'adaptent automatiquement.</p>
+<p><strong>Orientation</strong> : Direction dans laquelle l'appareil est tenu. "Portrait" signifie vertical (hauteur supérieure à la largeur), "landscape" signifie horizontal (largeur supérieure à la hauteur). Les media queries peuvent détecter cette orientation.</p>
+<h2 id="documentation-de-référence">Documentation de référence </h2>
+<p>Pour approfondir vos connaissances et consulter la documentation officielle, ces ressources constituent des références incontournables :</p>
+<ul>
+<li>MDN Web Docs - <a href="https://developer.mozilla.org/fr/docs/Web/CSS/CSS_media_queries">Media Queries</a> - La documentation de référence maintenue par Mozilla, exhaustive et précise</li>
+<li>W3Schools - <a href="https://www.w3schools.com/css/css_rwd_intro.asp">Responsive Web Design</a> - Des tutoriels interactifs et des exemples pratiques</li>
+<li>Can I Use : <a href="https://caniuse.com">https://caniuse.com</a> - Pour vérifier la compatibilité des media queries avec différents navigateurs</li>
+</ul>
+<hr>
+<h2 id="le-contexte-historique-et-technique">Le contexte historique et technique </h2>
+<p>Dans les premières années du web, les sites étaient conçus pour une seule taille d'écran : celle des ordinateurs de bureau, généralement autour de <strong>1024 pixels</strong> de large. Cette approche fonctionnait car les variations d'écrans étaient minimes.</p>
+<p>Cependant, l'arrivée des smartphones en <strong>2007</strong>, puis des tablettes, a radicalement transformé le paysage du web.</p>
+<p>Aujourd'hui, les utilisateurs naviguent sur des écrans variant de 320 pixels (petits smartphones) à plus de <strong>2560 pixels</strong> (écrans 4K). Sans adaptation, un site conçu pour 1024px de large serait illisible sur un smartphone de 375px et sous-exploité sur un écran de 1920px.</p>
+<h2 id="le-problème-fondamental">Le problème fondamental </h2>
+<p>Observons un problème concret que rencontrent tous les développeurs web débutants.</p>
+<pre data-role="codeBlock" data-info="html" class="language-html html"><code> <span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fr<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Problème de largeur fixe<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+     <span class="token comment">/* Cette carte a une largeur fixe de 800 pixels */</span>
+     <span class="token selector"><span class="token class">.carte</span></span> <span class="token punctuation">{</span>
+       <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">800</span><span class="token unit">px</span><span class="token punctuation">;</span>           <span class="token comment">/* Largeur rigide, non adaptative */</span>
+       <span class="token property">background</span><span class="token punctuation">:</span> <span class="token color">lightblue</span><span class="token punctuation">;</span>
+       <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span>          <span class="token comment">/* Espacement interne de 20 pixels */</span>
+       <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span>           <span class="token comment">/* Espacement externe de 20 pixels */</span>
+     <span class="token punctuation">}</span>
+   </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>carte<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>Horaires d'ouverture<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Notre restaurant est ouvert du lundi au vendredi de 12h à 14h<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre><p><a href="https://codepen.io/b3no1t/pen/LENpyKM">codepen link</a></p>
+<h3 id="analyse-du-problème">Analyse du problème </h3>
+<p>Sur un ordinateur avec un écran de 1920px de large, cette carte de 800px s'affiche parfaitement. Mais que se passe-t-il sur un smartphone dont l'écran fait 375px de large ?</p>
+<p>La carte nécessite 800px (largeur) + 40px (padding gauche et droite) + 40px (margin gauche et droite) = 880px au total. Sur un écran de 375px, elle déborde de 505 pixels, créant un défilement horizontal désagréable et rendant le contenu partiellement invisible.</p>
+<h4 id="conséquences-concrètes">Conséquences concrètes: </h4>
+<p>L'utilisateur doit faire défiler horizontalement pour lire le contenu.<br>
+L'expérience utilisateur est dégradée.<br>
+Le taux de rebond augmente (les visiteurs quittent le site).<br>
+Le référencement Google est pénalisé (Google privilégie les sites mobile-friendly).</p>
+<h4 id="la-solution--les-media-queries">La solution : Les Media Queries </h4>
+<p>Les media queries offrent une solution élégante à ce problème en permettant d'appliquer des styles différents selon les caractéristiques de l'appareil.<br>
+Au lieu d'une seule version rigide, vous créez plusieurs versions adaptatives qui se déclenchent automatiquement.</p>
+<hr>
+<h2 id="chapitre-1--votre-première-media-query">Chapitre 1 : Votre première Media Query </h2>
+<h3 id="comprendre-la-syntaxe-de-base">Comprendre la syntaxe de base </h3>
+<p>Une media query suit une structure logique et précise. Décomposons-la élément par élément :</p>
+<pre data-role="codeBlock" data-info="css" class="language-css css"><code><span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> <span class="token number">600</span><span class="token unit">px</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+  <span class="token comment">/* Règles CSS ici */</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="analyse-détaillée-de-chaque-composant">Analyse détaillée de chaque composant </h4>
+<p><strong>@media</strong> : Le mot-clé qui signale au navigateur qu'une condition va suivre. Le symbole @ indique une règle spéciale en CSS (appelée "at-rule").<br>
+<strong>Les parenthèses ( )</strong> : Contiennent la condition à tester. C'est une interrogation que le navigateur va évaluer comme vraie ou fausse.<br>
+<strong>max-width: 600px</strong> : La condition elle-même. Littéralement : "si la largeur maximale de l'écran est de 600 pixels". En d'autres termes : "si l'écran fait 600px ou moins".<br>
+<strong>Les accolades { }</strong> : Délimitent le bloc de règles CSS qui s'appliquera uniquement si la condition est vraie.</p>
+<h2 id="premier-exemple-fonctionnel-et-commenté">Premier exemple fonctionnel et commenté </h2>
+<p>Créons ensemble votre première page responsive avec une media query :</p>
+<pre data-role="codeBlock" data-info="html" class="language-html html"><code> <span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fr<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+   <span class="token comment">&lt;!-- CRUCIAL : Cette balise indique au navigateur de s'adapter à la taille réelle de l'écran --&gt;</span>
+   <span class="token comment">&lt;!-- Sans elle, les media queries ne fonctionnent pas correctement sur mobile --&gt;</span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Ma première media query<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+     <span class="token comment">/* ===== STYLES DE BASE (s'appliquent à TOUS les écrans) ===== */</span>
+     <span class="token selector"><span class="token class">.carte</span></span> <span class="token punctuation">{</span>
+       <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">800</span><span class="token unit">px</span><span class="token punctuation">;</span>              <span class="token comment">/* Largeur pour grands écrans */</span>
+       <span class="token property">background</span><span class="token punctuation">:</span> <span class="token color">lightblue</span><span class="token punctuation">;</span>     <span class="token comment">/* Fond bleu clair */</span>
+       <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span>             <span class="token comment">/* 20px d'espace à l'intérieur */</span>
+       <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">20</span><span class="token unit">px</span> auto<span class="token punctuation">;</span>         <span class="token comment">/* Centrage horizontal avec 'auto' */</span>
+       <span class="token property">border-radius</span><span class="token punctuation">:</span> <span class="token number">8</span><span class="token unit">px</span><span class="token punctuation">;</span>        <span class="token comment">/* Coins arrondis de 8 pixels */</span>
+     <span class="token punctuation">}</span>
+     
+     <span class="token selector"><span class="token class">.carte</span> h2</span> <span class="token punctuation">{</span>
+       <span class="token property">margin-top</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>               <span class="token comment">/* Supprime l'espace au-dessus du titre */</span>
+       <span class="token property">color</span><span class="token punctuation">:</span> <span class="token hexcode color">#2c3e50</span><span class="token punctuation">;</span>            <span class="token comment">/* Couleur gris-bleu foncé */</span>
+     <span class="token punctuation">}</span>
+     
+     <span class="token comment">/* ===== MEDIA QUERY POUR PETITS ÉCRANS ===== */</span>
+     <span class="token comment">/* Cette règle s'active uniquement quand l'écran fait 700px ou moins */</span>
+     <span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> <span class="token number">700</span><span class="token unit">px</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+       <span class="token selector"><span class="token class">.carte</span></span> <span class="token punctuation">{</span>
+         <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">90</span><span class="token unit">%</span><span class="token punctuation">;</span>            <span class="token comment">/* Prend 90% de la largeur disponible */</span>
+         <span class="token comment">/* Pourquoi 90% et pas 100% ? Pour garder un peu d'air sur les côtés */</span>
+         
+         <span class="token property">background</span><span class="token punctuation">:</span> <span class="token color">lightcoral</span><span class="token punctuation">;</span> <span class="token comment">/* Change le fond en rose corail */</span>
+         <span class="token comment">/* Ce changement de couleur est juste pour visualiser la transition */</span>
+         
+         <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">15</span><span class="token unit">px</span><span class="token punctuation">;</span>         <span class="token comment">/* Réduit le padding pour économiser l'espace */</span>
+         <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">10</span><span class="token unit">px</span> auto<span class="token punctuation">;</span>     <span class="token comment">/* Réduit aussi les marges externes */</span>
+       <span class="token punctuation">}</span>
+       
+       <span class="token selector"><span class="token class">.carte</span> h2</span> <span class="token punctuation">{</span>
+         <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">1.2</span><span class="token unit">em</span><span class="token punctuation">;</span>      <span class="token comment">/* Réduit la taille du titre sur mobile */</span>
+         <span class="token comment">/* 1.2em = 1.2 fois la taille de police parente */</span>
+       <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span>
+   </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>carte<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>Bienvenue sur notre site 🎉<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Réduisez la largeur de votre fenêtre pour voir la carte s'adapter automatiquement. Observez le changement de couleur qui se produit à 700 pixels de large.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre><p><a href="https://codepen.io/b3no1t/pen/wBGKzGj">codepen link</a></p>
+<h3 id="comprendre-ce-qui-se-passe-étape-par-étape">Comprendre ce qui se passe étape par étape </h3>
+<h4 id="scenario-1--écran-de-1200px-ordinateur-de-bureau">Scenario 1 : Écran de 1200px (ordinateur de bureau) </h4>
+<p>Le navigateur lit les styles de base<br>
+La carte a une largeur de 800px avec un fond bleu clair<br>
+Le navigateur lit la media query @media (max-width: 700px)<br>
+Il évalue : "1200px est-il inférieur ou égal à 700px ?" → NON<br>
+Les styles dans la media query ne s'appliquent PAS<br>
+<strong>Résultat :</strong> carte bleue de 800px</p>
+<h4 id="scenario-2--écran-de-500px-smartphone">Scenario 2 : Écran de 500px (smartphone) </h4>
+<p>Le navigateur lit les styles de base<br>
+La carte commence avec une largeur de 800px et un fond bleu<br>
+Le navigateur lit la media query @media(max-width: 700px)<br>
+Il évalue : "500px est-il inférieur ou égal à 700px ?" → OUI<br>
+Les styles dans la media query REMPLACENT les styles de base<br>
+<strong>Résultat :</strong> carte rose corail de 90% de largeur (soit 450px sur un écran de 500px)</p>
+<h4 id="scenario-3--exactement-700px">Scenario 3 : Exactement 700px </h4>
+<p>La condition max-width: 700px inclut 700px<br>
+À 700px, la media query <strong>s'active</strong><br>
+À 701px, elle <strong>se désactive</strong><br>
+Le point de transition est donc précisément à 700px</p>
+<hr>
+<h3 id="exercice-pratique-guidé">Exercice pratique guidé </h3>
+<p>Modifiez l'exemple ci-dessus pour ajouter ces comportements :</p>
+<h4 id="objectif-1--changer-la-couleur-du-texte">Objectif 1 : Changer la couleur du texte </h4>
+<pre data-role="codeBlock" data-info="css" class="language-css css"><code><span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> <span class="token number">700</span><span class="token unit">px</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+
+  <span class="token selector"><span class="token class">.carte</span></span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">90</span><span class="token unit">%</span><span class="token punctuation">;</span>
+    <span class="token property">background</span><span class="token punctuation">:</span> <span class="token color">lightcoral</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token comment">/* Ajoutez cette règle : */</span>
+  <span class="token selector"><span class="token class">.carte</span> p</span> <span class="token punctuation">{</span>
+    <span class="token property">color</span><span class="token punctuation">:</span> <span class="token hexcode color">#ffffff</span><span class="token punctuation">;</span>        <span class="token comment">/* Texte blanc pour meilleur contraste */</span>
+    <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">0.9</span><span class="token unit">em</span><span class="token punctuation">;</span>      <span class="token comment">/* Légèrement plus petit sur mobile */</span>
+  <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span>
+</code></pre><h5 id="pourquoi-cette-modification-">Pourquoi cette modification ? </h5>
+<p>Sur mobile, l'espace est précieux.<br>
+Réduire légèrement la taille de police permet d'afficher plus de contenu sans scroll, tout en restant lisible.</p>
+<h5 id="objectif-2--masquer-un-élément-sur-mobile">Objectif 2 : Masquer un élément sur mobile </h5>
+<pre data-role="codeBlock" data-info="html" class="language-html html"><code><span class="token comment">&lt;!-- Ajoutez ceci dans votre HTML : --&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>carte<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>Bienvenue sur notre site 🎉<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>Réduisez la largeur de votre fenêtre...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>detail<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Cette information secondaire n'est visible que sur grand écran.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre><p>Puis dans votre CSS :</p>
+<pre data-role="codeBlock" data-info="css" class="language-css css"><code> <span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> <span class="token number">700</span><span class="token unit">px</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+
+   <span class="token comment">/* Ajoutez cette règle : */</span>
+   <span class="token selector"><span class="token class">.detail</span></span> <span class="token punctuation">{</span>
+     <span class="token property">display</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>        <span class="token comment">/* Masque cet élément sur petits écrans */</span>
+   <span class="token punctuation">}</span>
+
+ <span class="token punctuation">}</span>
+</code></pre><h4 id="pourquoi-masquer-du-contenu-">Pourquoi masquer du contenu ? </h4>
+<p>Concentrez-vous sur l'essentiel et évitez la surcharge d'informations.<br>
+Les détails secondaires peuvent être cachés pour améliorer la lisibilité.</p>
+<h2 id="chapitre-2--maîtriser-les-conditions-min-width-et-max-width">Chapitre 2 : Maîtriser les conditions min-width et max-width </h2>
+<p><strong>La différence fondamentale entre min et max</strong><br>
+Ces deux conditions sont les piliers des media queries, mais elles fonctionnent de manière opposée. Comprendre cette différence est crucial pour maîtriser le responsive design.</p>
+<h3 id="max-width--cibler-les-petits-écrans">max-width : Cibler les petits écrans </h3>
+<pre data-role="codeBlock" data-info="css" class="language-css css"><code><span class="token comment">/* Cette règle dit : "SI l'écran fait AU MAXIMUM 600px" */</span>
+<span class="token comment">/* Autrement dit : "SI l'écran fait 600px OU MOINS" */</span>
+<span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> <span class="token number">600</span><span class="token unit">px</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+  <span class="token selector"><span class="token class">.element</span></span> <span class="token punctuation">{</span>
+    <span class="token comment">/* Ces styles s'appliquent aux PETITS écrans */</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p><strong>Visualisation :</strong></p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>0px ←────────────────→ 600px ←────────────────→ ∞
+       ✅ S'applique         ❌ Ne s'applique pas
+</code></pre><h3 id="min-width--cibler-les-grands-écrans">min-width : Cibler les grands écrans </h3>
+<pre data-role="codeBlock" data-info="css" class="language-css css"><code><span class="token comment">/* Cette règle dit : "SI l'écran fait AU MINIMUM 600px" */</span>
+<span class="token comment">/* Autrement dit : "SI l'écran fait 600px OU PLUS" */</span>
+<span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">min-width</span><span class="token punctuation">:</span> <span class="token number">600</span><span class="token unit">px</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+  <span class="token selector"><span class="token class">.element</span></span> <span class="token punctuation">{</span>
+    <span class="token comment">/* Ces styles s'appliquent aux GRANDS écrans */</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><p><strong>Visualisation :</strong></p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>0px ←────────────────→ 600px ←────────────────→ ∞
+    ❌ Ne s'applique pas      ✅ S'applique
+</code></pre><h4 id="cas-dusage-typiques">Cas d'usage typiques </h4>
+<p>•  Ajouter des colonnes supplémentaires<br>
+•  Afficher plus d'informations<br>
+•  Augmenter les espacements et marges<br>
+•  Activer des effets visuels plus complexes</p>
+<h4 id="exemple-comparatif-détaillé">Exemple comparatif détaillé </h4>
+<p>Créons un composant qui se comporte différemment selon l'approche choisie.</p>
+<pre data-role="codeBlock" data-info="html" class="language-html html"><code> <span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>fr<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">charset</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>UTF-8<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>viewport<span class="token punctuation">"</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>width=device-width, initial-scale=1.0<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Comparaison min-width vs max-width<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+     <span class="token comment">/* ========================================
+        APPROCHE 1 : DESKTOP-FIRST (max-width)
+        ======================================== */</span>
+     
+     <span class="token selector"><span class="token class">.titre-desktop-first</span></span> <span class="token punctuation">{</span>
+       <span class="token comment">/* Styles pour GRANDS écrans par défaut */</span>
+       <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">32</span><span class="token unit">px</span><span class="token punctuation">;</span>             <span class="token comment">/* Grande taille pour desktop */</span>
+       <span class="token property">color</span><span class="token punctuation">:</span> <span class="token hexcode color">#2c3e50</span><span class="token punctuation">;</span>            <span class="token comment">/* Bleu foncé */</span>
+       <span class="token property">text-align</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>            <span class="token comment">/* Aligné à gauche */</span>
+       <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">30</span><span class="token unit">px</span><span class="token punctuation">;</span>               <span class="token comment">/* Grand espacement */</span>
+       <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode color">#ecf0f1</span><span class="token punctuation">;</span>       <span class="token comment">/* Fond gris clair */</span>
+     <span class="token punctuation">}</span>
+     
+     <span class="token comment">/* On ADAPTE ensuite pour les petits écrans */</span>
+     <span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> <span class="token number">768</span><span class="token unit">px</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+       <span class="token selector"><span class="token class">.titre-desktop-first</span></span> <span class="token punctuation">{</span>
+         <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span>         <span class="token comment">/* Réduit pour mobile */</span>
+         <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>      <span class="token comment">/* Centre sur mobile */</span>
+         <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">15</span><span class="token unit">px</span><span class="token punctuation">;</span>           <span class="token comment">/* Réduit l'espacement */</span>
+         <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode color">#3498db</span><span class="token punctuation">;</span>   <span class="token comment">/* Change le fond */</span>
+         <span class="token property">color</span><span class="token punctuation">:</span> <span class="token color">white</span><span class="token punctuation">;</span>            <span class="token comment">/* Texte blanc pour contraste */</span>
+       <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span>
+     
+     <span class="token comment">/* ========================================
+        APPROCHE 2 : MOBILE-FIRST (min-width)
+        ======================================== */</span>
+     
+     <span class="token selector"><span class="token class">.titre-mobile-first</span></span> <span class="token punctuation">{</span>
+       <span class="token comment">/* Styles pour PETITS écrans par défaut */</span>
+       <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span>           <span class="token comment">/* Petite taille pour mobile */</span>
+       <span class="token property">color</span><span class="token punctuation">:</span> <span class="token color">white</span><span class="token punctuation">;</span>              <span class="token comment">/* Texte blanc */</span>
+       <span class="token property">text-align</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>        <span class="token comment">/* Centré sur mobile */</span>
+       <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">15</span><span class="token unit">px</span><span class="token punctuation">;</span>             <span class="token comment">/* Petit espacement */</span>
+       <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode color">#e74c3c</span><span class="token punctuation">;</span>       <span class="token comment">/* Fond rouge */</span>
+     <span class="token punctuation">}</span>
+     
+     <span class="token comment">/* On AMÉLIORE ensuite pour les grands écrans */</span>
+     <span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">min-width</span><span class="token punctuation">:</span> <span class="token number">769</span><span class="token unit">px</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+       <span class="token selector"><span class="token class">.titre-mobile-first</span></span> <span class="token punctuation">{</span>
+         <span class="token property">font-size</span><span class="token punctuation">:</span> <span class="token number">32</span><span class="token unit">px</span><span class="token punctuation">;</span>         <span class="token comment">/* Augmente pour desktop */</span>
+         <span class="token property">text-align</span><span class="token punctuation">:</span> left<span class="token punctuation">;</span>        <span class="token comment">/* Aligne à gauche */</span>
+         <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">30</span><span class="token unit">px</span><span class="token punctuation">;</span>           <span class="token comment">/* Augmente l'espacement */</span>
+         <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode color">#ecf0f1</span><span class="token punctuation">;</span>     <span class="token comment">/* Fond gris clair */</span>
+         <span class="token property">color</span><span class="token punctuation">:</span> <span class="token hexcode color">#2c3e50</span><span class="token punctuation">;</span>          <span class="token comment">/* Texte bleu foncé */</span>
+       <span class="token punctuation">}</span>
+     <span class="token punctuation">}</span>
+     
+     <span class="token comment">/* Styles pour la démonstration */</span>
+     <span class="token selector"><span class="token class">.container</span></span> <span class="token punctuation">{</span>
+       <span class="token property">max-width</span><span class="token punctuation">:</span> <span class="token number">1200</span><span class="token unit">px</span><span class="token punctuation">;</span>
+       <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">40</span><span class="token unit">px</span> auto<span class="token punctuation">;</span>
+       <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+     
+     <span class="token selector"><span class="token class">.explication</span></span> <span class="token punctuation">{</span>
+       <span class="token property">background</span><span class="token punctuation">:</span> <span class="token hexcode color">#fffacd</span><span class="token punctuation">;</span>
+       <span class="token property">padding</span><span class="token punctuation">:</span> <span class="token number">15</span><span class="token unit">px</span><span class="token punctuation">;</span>
+       <span class="token property">border-left</span><span class="token punctuation">:</span> <span class="token number">4</span><span class="token unit">px</span> solid <span class="token hexcode color">#f39c12</span><span class="token punctuation">;</span>
+       <span class="token property">margin</span><span class="token punctuation">:</span> <span class="token number">20</span><span class="token unit">px</span> <span class="token number">0</span><span class="token punctuation">;</span>
+     <span class="token punctuation">}</span>
+   </span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>container<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>explication<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>Instructions :<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span> Réduisez et agrandissez la fenêtre de votre navigateur. 
+       Observez comment les deux titres se comportent différemment selon l'approche utilisée.
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+     
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>titre-desktop-first<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+       Approche Desktop-First (max-width)
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+     
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>titre-mobile-first<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+       Approche Mobile-First (min-width)
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+     
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>explication<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+       <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>Résultat identique, approche différente :<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">&gt;</span></span>
+       • Desktop-First part de grand et réduit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">&gt;</span></span>
+       • Mobile-First part de petit et agrandit<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>br</span><span class="token punctuation">&gt;</span></span>
+       • Les deux arrivent au même résultat visuel
+     <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+ <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre><p><a href="https://codepen.io/b3no1t/pen/OPNymqV">codepen link</a></p>
+<h3 id="analyse-des-deux-approches">Analyse des deux approches </h3>
+<h4 id="desktop-first--la-logique-de-réduction">Desktop-First : La logique de réduction </h4>
+<p>Quand vous utilisez <code>max-width</code>, vous pensez en termes de <strong>réduction</strong> et d'adaptation.<br>
+Vous créez d'abord une version complète et riche pour desktop, puis vous "enlevez" des éléments ou réduisez la complexité pour les petits écrans.</p>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li><strong>Intuitif</strong> si vous concevez d'abord sur desktop</li>
+<li>Facile de visualiser la version "complète" en premier</li>
+</ul>
+<p><strong>Inconvénients</strong> :</p>
+<ul>
+<li>Peut amener à surcharger la version mobile</li>
+<li>Le code mobile peut devenir une longue liste de réductions</li>
+<li><strong>Beaucoup moins performant</strong> (le mobile charge tout le CSS desktop d'abord)</li>
+</ul>
+<h4 id="mobile-first--la-logique-damélioration-progressive">Mobile-First : La logique d'amélioration progressive </h4>
+<p>Quand vous utilisez <code>min-width</code>, vous pensez en termes d'<strong>enrichissement</strong>.<br>
+Vous créez d'abord une version simple et épurée pour mobile, puis vous "ajoutez" des fonctionnalités pour les grands écrans.</p>
+<p><strong>Avantages</strong> :</p>
+<ul>
+<li>Force à prioriser le contenu essentiel</li>
+<li>Meilleure performance sur mobile (moins de CSS à surcharger)</li>
+<li>Aligné avec la réalité (60%+ du trafic est mobile, 67% pour <a href="http://cfitech.be">cfitech.be</a>)</li>
+<li>Code plus propre et maintenable</li>
+</ul>
+<p><strong>Inconvénients</strong> :</p>
+<ul>
+<li>Nécessite un changement de mentalité (mind-set)</li>
+<li>Peut sembler contre-intuitif au début</li>
+</ul>
+<h3 id="règle-de-ciblage-précis-avec-and">Règle de ciblage précis avec AND </h3>
+<p>Parfois, vous voulez cibler une plage de tailles spécifique, ni trop petite ni trop grande.</p>
+<p><strong>C'est là qu'intervient l'opérateur</strong> <code>AND</code> :</p>
+<pre data-role="codeBlock" data-info="css" class="language-css css"><code> <span class="token comment">/* Cible UNIQUEMENT les écrans entre 600px et 900px */</span>
+ <span class="token comment">/* Les tablettes, en quelque sorte */</span>
+ <span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">min-width</span><span class="token punctuation">:</span> <span class="token number">600</span><span class="token unit">px</span><span class="token punctuation">)</span> <span class="token keyword keyword-and">and</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> <span class="token number">900</span><span class="token unit">px</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+   <span class="token selector"><span class="token class">.element</span></span> <span class="token punctuation">{</span>
+     <span class="token comment">/* Styles spécifiques aux tablettes */</span>
+   <span class="token punctuation">}</span>
+ <span class="token punctuation">}</span>
+</code></pre><pre data-role="codeBlock" data-info="text" class="language-text text"><code>Décomposition logique :
+
+min-width: 600px → "Au moins 600px" → Exclut les petits écrans (&lt; 600px)
+            AND → "ET en même temps"
+max-width: 900px → "Au maximum 900px" → Exclut les grands écrans (&gt; 900px)
+</code></pre><p><strong>Résultat :</strong> Seuls les écrans entre 600px et 900px (inclus) sont ciblés.</p>
+<p><strong>Visualisation :</strong></p>
+<pre data-role="codeBlock" data-info="text" class="language-text text"><code>0px ←────→ 600px ←──────────────→ 900px ←────→ ∞
+      ❌          ✅ S'applique         ❌
+</code></pre><h3 id="exemple-pratique">Exemple pratique </h3>
+<pre data-role="codeBlock" data-info="css" class="language-css css"><code> <span class="token comment">/* Styles de base pour mobile */</span>
+<span class="token selector"><span class="token class">.galerie</span></span> <span class="token punctuation">{</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>           <span class="token comment">/* Une colonne */</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector"><span class="token class">.photo</span></span> <span class="token punctuation">{</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> <span class="token number">100</span><span class="token unit">%</span><span class="token punctuation">;</span>              <span class="token comment">/* Pleine largeur */</span>
+  <span class="token property">margin-bottom</span><span class="token punctuation">:</span> <span class="token number">15</span><span class="token unit">px</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Tablettes : 2 colonnes */</span>
+<span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">min-width</span><span class="token punctuation">:</span> <span class="token number">600</span><span class="token unit">px</span><span class="token punctuation">)</span> <span class="token keyword keyword-and">and</span> <span class="token punctuation">(</span><span class="token property">max-width</span><span class="token punctuation">:</span> <span class="token number">900</span><span class="token unit">px</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+  <span class="token selector"><span class="token class">.galerie</span></span> <span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>          <span class="token comment">/* Active Flexbox */</span>
+    <span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap<span class="token punctuation">;</span>        <span class="token comment">/* Permet le retour à la ligne */</span>
+    <span class="token property">gap</span><span class="token punctuation">:</span> <span class="token number">15</span><span class="token unit">px</span><span class="token punctuation">;</span>              <span class="token comment">/* Espace entre les éléments */</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token selector"><span class="token class">.photo</span></span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token unit">%</span> <span class="token operator">-</span> <span class="token number">8</span><span class="token unit">px</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 2 colonnes avec espace */</span>
+    <span class="token comment">/* calc() fait le calcul : 50% de largeur moins la moitié du gap */</span>
+    <span class="token property">margin-bottom</span><span class="token punctuation">:</span> <span class="token number">0</span><span class="token punctuation">;</span>       <span class="token comment">/* Supprime la marge, le gap suffit */</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment">/* Desktop : 3 colonnes */</span>
+<span class="token atrule"><span class="token rule">@media</span> <span class="token punctuation">(</span><span class="token property">min-width</span><span class="token punctuation">:</span> <span class="token number">901</span><span class="token unit">px</span><span class="token punctuation">)</span></span> <span class="token punctuation">{</span>
+  <span class="token selector"><span class="token class">.galerie</span></span> <span class="token punctuation">{</span>
+    <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+    <span class="token property">flex-wrap</span><span class="token punctuation">:</span> wrap<span class="token punctuation">;</span>
+    <span class="token property">gap</span><span class="token punctuation">:</span> <span class="token number">20</span><span class="token unit">px</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  
+  <span class="token selector"><span class="token class">.photo</span></span> <span class="token punctuation">{</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> <span class="token function">calc</span><span class="token punctuation">(</span><span class="token number">33.333</span><span class="token unit">%</span> <span class="token operator">-</span> <span class="token number">14</span><span class="token unit">px</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">/* 3 colonnes */</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="pourquoi-ces-calculs-spécifiques-">Pourquoi ces calculs spécifiques ? </h4>
+<p>Pour <strong>2 colonnes avec un gap de 15px</strong> :</p>
+<ul>
+<li>Largeur totale = 100%</li>
+<li>Gap total = 15px (entre les deux colonnes)</li>
+<li>Chaque photo = 50% - (15px / 2) = 50% - 8px</li>
+</ul>
+<p>Pour <strong>3 colonnes avec un gap de 20px</strong> :</p>
+<ul>
+<li>Largeur totale = 100%</li>
+<li>Gap total = 40px (deux gaps pour trois colonnes)</li>
+<li>Chaque photo = 33.333% - (40px / 3) ≈ 33.333% - 14px</li>
+</ul>
+<blockquote>
+<p>Happy coding !</p>
+</blockquote>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>

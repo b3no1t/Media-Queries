@@ -1,21 +1,17 @@
 ---
-markdown:
-  image_dir: /assets/
-  path: mediaqueries-css3.md
-  absolute_image_path: false
+title: "CSS2 Media Queries : les fondations"
 export_on_save:
   html: true
 ---
 
 # Guide complet des Media Queries CSS3
 
-##  Lexique des termes techniques
+>Avant d'entamer l'apprentissage des media queries, il est essentiel de maîtriser le vocabulaire technique qui constituera la base de votre compréhension. Chaque terme présenté ici sera utilisé tout au long de ce guide et représente un concept fondamental du responsive design.
 
-*Avant d'entamer l'apprentissage des media queries, il est essentiel de maîtriser le vocabulaire technique qui constituera la base de votre compréhension. Chaque terme présenté ici sera utilisé tout au long de ce guide et représente un concept fondamental du responsive design.*
+## Termes fondamentaux
 
-### Termes fondamentaux
-
-**Media Query** : Une instruction CSS qui permet d'appliquer des règles de style conditionnelles en fonction des caractéristiques de l'appareil de l'utilisateur. Le terme "query" signifie "requête" ou "interrogation" - on interroge donc le navigateur sur les caractéristiques de l'écran avant d'appliquer des styles spécifiques.
+**Media Query** : Une instruction CSS qui permet d'appliquer des règles de style conditionnelles en fonction des caractéristiques de l'appareil de l'utilisateur. Le terme "query" signifie "requête" ou "interrogation" - on interroge donc le navigateur sur les caractéristiques de l'écran avant d'appliquer des styles spécifiques. *C'est comme adapter les meubles selon la taille de la pièce
+Vous réorganisez tout votre salon différemment selon que vous êtes dans un studio ou une grande maison.*
 
 **Responsive Design** : Approche de conception web qui vise à créer des interfaces s'adaptant automatiquement et intelligemment à tous les types d'écrans et d'appareils, du smartphone à l'écran de bureau en passant par les tablettes. Le terme "responsive" signifie littéralement "qui répond" - le design répond aux caractéristiques de l'appareil utilisé.
 
@@ -27,13 +23,14 @@ export_on_save:
 
 **Pixel (px)** : Unité de mesure fondamentale en CSS représentant un point d'affichage à l'écran. Un écran de 1920px de large contient 1920 points horizontalement. C'est l'unité la plus utilisée pour définir les breakpoints car elle offre un contrôle précis.
 
-### Termes CSS spécifiques
+## Termes CSS spécifiques
 
 **max-width** : Propriété de condition signifiant "largeur maximale". Dans une media query, max-width: 600px cible tous les écrans dont la largeur est inférieure ou égale à 600 pixels. C'est l'outil principal de l'approche desktop-first.
 
 **min-width** : Propriété de condition signifiant "largeur minimale". Dans une media query, min-width: 600px cible tous les écrans dont la largeur est supérieure ou égale à 600 pixels. C'est l'outil principal de l'approche mobile-first.
 
-**Cascade CSS** : Principe fondamental du CSS selon lequel, lorsque plusieurs règles s'appliquent au même élément, c'est la dernière règle définie qui prend le dessus. Ce principe est crucial pour comprendre l'ordre des media queries.
+**Cascade CSS** : Principe fondamental du CSS selon lequel, lorsque plusieurs règles s'appliquent au même élément, c'est la dernière règle définie qui prend le dessus.
+*Ce principe est crucial pour comprendre l'ordre des media queries*.
 
 **Block vs Inline** : Deux types d'affichage fondamentaux en HTML. Un élément "block" (comme ``<div>``) occupe toute la largeur disponible et force un retour à la ligne. Un élément "inline" (comme ``<span>``) ne prend que la place nécessaire et reste sur la même ligne.
 
@@ -57,9 +54,11 @@ Pour approfondir vos connaissances et consulter la documentation officielle, ces
 
 ## Le contexte historique et technique
 
-Dans les premières années du web, les sites étaient conçus pour une seule taille d'écran : celle des ordinateurs de bureau, généralement autour de 1024 pixels de large. Cette approche fonctionnait car les variations d'écrans étaient minimes. 
+Dans les premières années du web, les sites étaient conçus pour une seule taille d'écran : celle des ordinateurs de bureau, généralement autour de **1024 pixels** de large. Cette approche fonctionnait car les variations d'écrans étaient minimes.
+
 Cependant, l'arrivée des smartphones en **2007**, puis des tablettes, a radicalement transformé le paysage du web.
-Aujourd'hui, les utilisateurs naviguent sur des écrans variant de 320 pixels (petits smartphones) à plus de 2560 pixels (écrans 4K). Sans adaptation, un site conçu pour 1024px de large serait illisible sur un smartphone de 375px et sous-exploité sur un écran de 1920px.
+
+Aujourd'hui, les utilisateurs naviguent sur des écrans variant de 320 pixels (petits smartphones) à plus de **2560 pixels** (écrans 4K). Sans adaptation, un site conçu pour 1024px de large serait illisible sur un smartphone de 375px et sous-exploité sur un écran de 1920px.
 
 ## Le problème fondamental
 
@@ -202,7 +201,7 @@ Les styles dans la media query ne s'appliquent PAS
 
 Le navigateur lit les styles de base
 La carte commence avec une largeur de 800px et un fond bleu
-Le navigateur lit la media query @media (max-width: 700px)
+Le navigateur lit la media query @media(max-width: 700px)
 Il évalue : "500px est-il inférieur ou égal à 700px ?" → OUI
 Les styles dans la media query REMPLACENT les styles de base
 **Résultat :** carte rose corail de 90% de largeur (soit 450px sur un écran de 500px)
@@ -324,7 +323,7 @@ Ces deux conditions sont les piliers des media queries, mais elles fonctionnent 
 •  Augmenter les espacements et marges
 •  Activer des effets visuels plus complexes
 
-##### Exemple comparatif détaillé
+#### Exemple comparatif détaillé
 
 Créons un composant qui se comporte différemment selon l'approche choisie.
 
@@ -424,6 +423,8 @@ Créons un composant qui se comporte différemment selon l'approche choisie.
  </body>
  </html>
  ```
+
+[codepen link](https://codepen.io/b3no1t/pen/OPNymqV)
 
 ### Analyse des deux approches
 
@@ -1134,6 +1135,8 @@ Utilisez un outil comme [WebAIM Contrast Checker](https://webaim.org/resources/c
 C'est une technique CSS-only qui fonctionne sans JavaScript, idéale pour comprendre les sélecteurs CSS avancés et les états interactifs.
 
 ---
+
+JOURS 2
 
 ## 🖼️ Chapitre 4 : Projet pratique - Galerie photos responsive
 

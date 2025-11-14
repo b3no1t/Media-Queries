@@ -1,0 +1,66 @@
+/* ===== Cache la checkbox (contrôle masqué) ===== */
+.menu-toggle {
+  display: none; /* Invisible mais fonctionnel */
+}
+
+
+/* ===== Bouton hamburger (3 barres) ===== */
+.menu-icon {
+  display: block;          /* Visible sur mobile */
+  position: absolute;      /* Positionnement indépendant */
+  top: 15px;
+  right: 20px;
+  cursor: pointer;         /* Indique que c'est cliquable */
+  z-index: 1000;          /* Au-dessus de tout */
+}
+
+.menu-icon span {
+  display: block;
+  width: 30px;
+  height: 3px;
+  background: white;
+  margin: 6px 0;
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+/* ===== Animation du hamburger en X quand actif ===== */
+.menu-toggle:checked + .menu-icon span:nth-child(1) {
+  transform: rotate(45deg) translate(7px, 7px);
+  /* Première barre : rotation et déplacement */
+}
+
+.menu-toggle:checked + .menu-icon span:nth-child(2) {
+  opacity: 0; /* Barre du milieu disparaît */
+}
+
+.menu-toggle:checked + .menu-icon span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -7px);
+  /* Troisième barre : rotation inverse */
+}
+
+/* ===== Menu liste (caché par défaut sur mobile) ===== */
+.menu-liste {
+  display: none; /* Caché par défaut */
+  list-style: none;
+}
+
+/* ===== Affiche le menu quand la checkbox est cochée ===== */
+.menu-toggle:checked ~ .menu-liste {
+  display: block; /* Affiche le menu */
+}
+
+/* ===== Sur desktop : menu toujours visible, hamburger caché ===== */
+@media (min-width: 600px) {
+  .menu-icon {
+    display: none; /* Cache le bouton hamburger */
+  }
+  
+  .menu-liste {
+    display: flex !important; /* Force l'affichage en flex */
+    /* !important nécessaire pour surcharger le display: none du mobile */
+    justify-content: center;
+  }
+  
+  /* ... reste du CSS desktop ... */
+}

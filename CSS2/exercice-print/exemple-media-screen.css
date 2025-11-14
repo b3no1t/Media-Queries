@@ -1,0 +1,52 @@
+* {
+ /* short Reset */
+ margin: 0;
+ padding: 0;
+ box-sizing: border-box;
+}
+
+body {
+ font-family:  'Trebuchet MS', Tahoma, Geneva, Verdana, sans-serif;
+ line-height: 1.6;
+ background-color: #cdd0d0;
+}
+
+.wrapper {
+ width: 100%;
+}
+
+.container,
+.container__header {
+ margin: 0 auto 0 auto;
+ max-width: 960px;
+}
+
+header {
+ background-color: #aaaaaa;
+ margin-bottom: 32px;
+}
+
+.container__header {
+ display: flex;
+ align-items: center;
+ justify-content: space-between;
+ width: 100%;
+
+}
+
+.brand {}
+
+.menu {
+ display: flex;
+ list-style: none;
+ gap: 8px;
+ padding: 16px;
+ justify-items: flex-end;
+}
+
+.menu-item {}
+
+img {
+ max-width: 100%;
+ border: 4px dotted whitesmoke
+}
